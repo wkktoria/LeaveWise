@@ -1,0 +1,16 @@
+@model TestViewModel
+@{
+    ViewData["Title"] = "Test View";
+}
+
+<h1>Hello from Test Controller</h1>
+<h2>The name is: @Model.Name</h2>
+
+@if (Model.CreationDate.HasValue)
+{
+    <h2>Creation date is: @Model.CreationDate</h2>
+}
+@if (!Model.CreationDate.HasValue)
+{
+    <h2>Creation date has not been specified.</h2>
+}
