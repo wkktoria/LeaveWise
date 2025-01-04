@@ -1,8 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace LeaveWise.Web.Models.LeaveTypes;
 
 public class LeaveTypeCreateVM
 {
+    [Required]
+    [Length(4, 150, ErrorMessage = "You have violated the length requirements.")]
     public string Name { get; set; } = string.Empty;
 
-    public int NumberOfDays { get; set; }
+    [Required] [Range(1, 90)] public int NumberOfDays { get; set; }
 }
