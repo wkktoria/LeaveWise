@@ -12,5 +12,6 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.Days,
                 opts => opts
                     .MapFrom(src => src.NumberOfDays));
+        CreateMap<LeaveTypeCreateVM, LeaveType>();
     }
 }
