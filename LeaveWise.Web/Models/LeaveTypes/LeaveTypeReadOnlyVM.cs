@@ -1,6 +1,6 @@
 namespace LeaveWise.Web.Models.LeaveTypes;
 
-public class IndexVM
+public class LeaveTypeReadOnlyVM
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

@@ -21,7 +21,7 @@ namespace LeaveWise.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.LeaveTypes.ToListAsync();
-            var viewData = _mapper.Map<List<IndexVM>>(data);
+            var viewData = _mapper.Map<List<LeaveTypeReadOnlyVM>>(data);
             return View(viewData);
         }
 
@@ -40,7 +40,9 @@ namespace LeaveWise.Web.Controllers
                 return NotFound();
             }
 
-            return View(leaveType);
+            var viewData = _mapper.Map<LeaveTypeReadOnlyVM>(leaveType);
+
+            return View(viewData);
         }
 
         // GET: LeaveTypes/Create
