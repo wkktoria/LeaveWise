@@ -13,5 +13,6 @@ public class AutoMapperProfile : Profile
                 opts => opts
                     .MapFrom(src => src.NumberOfDays));
         CreateMap<LeaveTypeCreateVM, LeaveType>();
+        CreateMap<LeaveTypeEditVM, LeaveType>().ReverseMap();
     }
 }
