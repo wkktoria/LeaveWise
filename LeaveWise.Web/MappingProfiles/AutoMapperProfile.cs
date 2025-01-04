@@ -9,7 +9,7 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<LeaveType, LeaveTypeReadOnlyVM>()
-            .ForMember(dest => dest.Days,
+            .ForMember(dest => dest.NumberOfDays,
                 opts => opts
                     .MapFrom(src => src.NumberOfDays));
         CreateMap<LeaveTypeCreateVM, LeaveType>();

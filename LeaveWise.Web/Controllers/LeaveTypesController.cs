@@ -140,8 +140,10 @@ namespace LeaveWise.Web.Controllers
             {
                 return NotFound();
             }
+            
+            var viewData = _mapper.Map<LeaveTypeReadOnlyVM>(leaveType);
 
-            return View(leaveType);
+            return View(viewData);
         }
 
         // POST: LeaveTypes/Delete/5
