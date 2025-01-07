@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LeaveWise.Web.Models.LeaveTypes;
 using LeaveWise.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LeaveWise.Web.Controllers
 {
+    [Authorize(Roles = Roles.Administrator)]
     public class LeaveTypesController(ILeaveTypesService leaveTypesService) : Controller
     {
         private const string NameExistsValidationMessage = "This leave type already exists in the database.";

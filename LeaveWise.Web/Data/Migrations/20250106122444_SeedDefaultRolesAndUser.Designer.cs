@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveWise.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250103183932_AddLeaveTypesTable")]
-    partial class AddLeaveTypesTable
+    [Migration("20250106122444_SeedDefaultRolesAndUser")]
+    partial class SeedDefaultRolesAndUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,26 @@ namespace LeaveWise.Web.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d80ab5af-7746-4240-bc95-aecbd758d97a",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        },
+                        new
+                        {
+                            Id = "6cfb5108-b1b4-42d1-b19f-0bbcefa89133",
+                            Name = "Supervisor",
+                            NormalizedName = "SUPERVISOR"
+                        },
+                        new
+                        {
+                            Id = "b1c82a14-d653-4fa0-9a3f-dbb0acae2f4c",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -160,6 +180,24 @@ namespace LeaveWise.Web.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1b36479a-64e0-48aa-983c-73f4fbd78a08",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cf44f5dc-5950-40ad-80a0-9affbc2f040e",
+                            Email = "admin@leavewise.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LEAVEWISE.COM",
+                            NormalizedUserName = "ADMIN@LEAVEWISE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPejU8Px6JR3MOshuJxS0Xv2mKpCWaoqf9OsdWFVylduomkp3pu7Jw8BeSvByMuT7A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f93c64bc-b493-4e16-9b00-d47bb0fed0b8",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@leavewise.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.ApplicationUserClaim<string>", b =>
@@ -224,6 +262,13 @@ namespace LeaveWise.Web.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1b36479a-64e0-48aa-983c-73f4fbd78a08",
+                            RoleId = "b1c82a14-d653-4fa0-9a3f-dbb0acae2f4c"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.ApplicationUserToken<string>", b =>
