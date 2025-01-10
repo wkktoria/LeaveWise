@@ -1,9 +1,8 @@
 using AutoMapper;
-using LeaveWise.Web.Data;
 using LeaveWise.Web.Models.LeaveTypes;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveWise.Web.Services;
+namespace LeaveWise.Web.Services.LeaveTypes;
 
 public class LeaveTypesService(ApplicationDbContext context, IMapper mapper) : ILeaveTypesService
 {
@@ -62,5 +61,11 @@ public class LeaveTypesService(ApplicationDbContext context, IMapper mapper) : I
         var lowercaseName = leaveTypeEdit.Name.ToLower();
         return await context.LeaveTypes.AnyAsync(l =>
             l.Name.ToLower().Equals(lowercaseName) && l.Id != leaveTypeEdit.Id);
+    }
+
+    public async Task<bool> DaysExceedMaximumAsync(int leaveTypeId, int days)
+    {
+        var leaveType = await context.LeaveTypes.FindAsync(leaveTypeId);
+        return leaveType?.NumberOfDays <= days;
     }
 }

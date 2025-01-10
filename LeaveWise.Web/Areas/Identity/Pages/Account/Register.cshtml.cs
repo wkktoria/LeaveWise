@@ -5,6 +5,7 @@
 
 using System.Text;
 using System.Text.Encodings.Web;
+using LeaveWise.Web.Services.LeaveAllocations;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
@@ -21,6 +22,7 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ILeaveAllocationsService _leaveAllocationsService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -28,7 +30,8 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ILeaveAllocationsService leaveAllocationsService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -37,6 +40,7 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _leaveAllocationsService = leaveAllocationsService;
         }
 
         public string[] RoleNames { get; set; }
@@ -147,9 +151,19 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    await _userManager.AddToRoleAsync(user, Input.RoleName);
+
+                    if (Input.RoleName == Roles.Supervisor)
+                    {
+                        await _userManager.AddToRolesAsync(user, [Roles.Employee, Roles.Supervisor]);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.Employee);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
+                    await _leaveAllocationsService.AllocateLeaveAsync(userId);
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

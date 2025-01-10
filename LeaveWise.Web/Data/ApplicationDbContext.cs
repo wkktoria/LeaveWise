@@ -58,4 +58,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     }
 
     public DbSet<LeaveType> LeaveTypes { get; set; }
+
+    public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
+
+    public DbSet<Period> Periods { get; set; }
 }

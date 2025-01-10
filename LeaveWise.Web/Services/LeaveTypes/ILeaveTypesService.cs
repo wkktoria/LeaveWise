@@ -1,6 +1,6 @@
 using LeaveWise.Web.Models.LeaveTypes;
 
-namespace LeaveWise.Web.Services;
+namespace LeaveWise.Web.Services.LeaveTypes;
 
 public interface ILeaveTypesService
 {
@@ -19,4 +19,6 @@ public interface ILeaveTypesService
     Task<bool> LeaveTypeNameExistsAsync(string name);
 
     Task<bool> LeaveTypeNameExistsForEditAsync(LeaveTypeEditVM leaveTypeEdit);
+    
+    Task<bool> DaysExceedMaximumAsync(int leaveTypeId, int days);
 }

@@ -1,7 +1,7 @@
 using System.Net.Mail;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
-namespace LeaveWise.Web.Services;
+namespace LeaveWise.Web.Services.Email;
 
 public class EmailSender(IConfiguration configuration) : IEmailSender
 {
