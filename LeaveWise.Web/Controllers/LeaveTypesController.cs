@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using LeaveWise.Web.Models.LeaveTypes;
 using LeaveWise.Web.Services.LeaveTypes;
 

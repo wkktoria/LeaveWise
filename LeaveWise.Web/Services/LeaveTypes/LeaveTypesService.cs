@@ -1,6 +1,4 @@
-using AutoMapper;
 using LeaveWise.Web.Models.LeaveTypes;
-using Microsoft.EntityFrameworkCore;
 
 namespace LeaveWise.Web.Services.LeaveTypes;
 

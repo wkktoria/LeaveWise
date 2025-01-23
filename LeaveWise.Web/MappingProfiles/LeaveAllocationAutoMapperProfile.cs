@@ -1,4 +1,3 @@
-using AutoMapper;
 using LeaveWise.Web.Models.LeaveAllocations;
 using LeaveWise.Web.Models.Periods;
 

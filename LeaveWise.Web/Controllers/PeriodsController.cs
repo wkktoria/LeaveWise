@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace LeaveWise.Web.Controllers
 {
     [Authorize(Roles = Roles.Administrator)]
@@ -48,6 +46,7 @@ namespace LeaveWise.Web.Controllers
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(period);
         }
 
@@ -64,6 +63,7 @@ namespace LeaveWise.Web.Controllers
             {
                 return NotFound();
             }
+
             return View(period);
         }
 
@@ -97,8 +97,10 @@ namespace LeaveWise.Web.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(period);
         }
 

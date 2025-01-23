@@ -1,7 +1,6 @@
 using LeaveWise.Web.Models.LeaveRequests;
 using LeaveWise.Web.Services.LeaveRequests;
 using LeaveWise.Web.Services.LeaveTypes;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LeaveWise.Web.Controllers;
 
@@ -14,7 +13,7 @@ public class LeaveRequestsController(ILeaveTypesService leaveTypesService, ILeav
         var model = await leaveRequestsService.GetEmployeeLeaveRequestsAsync();
         return View(model);
     }
-    
+
     public async Task<IActionResult> Create(int? leaveTypeId)
     {
         var leaveTypes = await leaveTypesService.GetAllAsync();

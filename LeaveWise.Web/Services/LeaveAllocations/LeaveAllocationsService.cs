@@ -1,8 +1,6 @@
-using AutoMapper;
 using LeaveWise.Web.Models.LeaveAllocations;
 using LeaveWise.Web.Services.Periods;
 using LeaveWise.Web.Services.Users;
-using Microsoft.EntityFrameworkCore;
 
 namespace LeaveWise.Web.Services.LeaveAllocations;
 

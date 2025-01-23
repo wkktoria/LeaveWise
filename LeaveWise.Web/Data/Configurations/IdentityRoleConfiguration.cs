@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace LeaveWise.Web.Data.Configurations;
 
 public class IdentityRoleConfiguration : IEntityTypeConfiguration<IdentityRole>

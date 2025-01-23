@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using LeaveWise.Web.Models;
 
 namespace LeaveWise.Web.Controllers;
