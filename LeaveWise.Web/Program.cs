@@ -2,7 +2,10 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using LeaveWise.Web.Services.Email;
 using LeaveWise.Web.Services.LeaveAllocations;
+using LeaveWise.Web.Services.LeaveRequests;
 using LeaveWise.Web.Services.LeaveTypes;
+using LeaveWise.Web.Services.Periods;
+using LeaveWise.Web.Services.Users;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +23,12 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddScoped<ILeaveTypesService, LeaveTypesService>();
 builder.Services.AddScoped<ILeaveAllocationsService, LeaveAllocationsService>();
+builder.Services.AddScoped<ILeaveRequestsService, LeaveRequestsService>();
+builder.Services.AddScoped<IPeriodsService, PeriodsService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("AdminSupervisorOnly", policy => { policy.RequireRole(Roles.Administrator, Roles.Supervisor); });
 
 builder.Services.AddHttpContextAccessor();
 

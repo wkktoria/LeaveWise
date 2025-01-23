@@ -15,4 +15,6 @@ public interface ILeaveAllocationsService
     Task<LeaveAllocationEditVM> GetEmployeeAllocationAsync(int allocationId);
 
     Task EditAllocationAsync(LeaveAllocationEditVM allocationEditVm);
+    
+    Task<LeaveAllocation> GetCurrantAllocationAsync(int leaveTypeId, string employeeId);
 }
