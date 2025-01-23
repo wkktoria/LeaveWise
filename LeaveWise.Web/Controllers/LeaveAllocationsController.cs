@@ -1,6 +1,6 @@
-using LeaveWise.Web.Models.LeaveAllocations;
-using LeaveWise.Web.Services.LeaveAllocations;
-using LeaveWise.Web.Services.LeaveTypes;
+using LeaveWise.Application.Models.LeaveAllocations;
+using LeaveWise.Application.Services.LeaveAllocations;
+using LeaveWise.Application.Services.LeaveTypes;
 
 namespace LeaveWise.Web.Controllers;
 
@@ -52,7 +52,7 @@ public class LeaveAllocationsController(
     [Authorize(Policy = "AdminSupervisorOnly")]
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditAllocation(LeaveAllocationEditVM allocation)
+    public async Task<IActionResult> EditAllocation(LeaveAllocationEditVm allocation)
     {
         if (await leaveTypesService.DaysExceedMaximumAsync(allocation.LeaveType.Id, allocation.Days))
         {

@@ -1,6 +1,6 @@
-using LeaveWise.Web.Models.LeaveRequests;
-using LeaveWise.Web.Services.LeaveRequests;
-using LeaveWise.Web.Services.LeaveTypes;
+using LeaveWise.Application.Models.LeaveRequests;
+using LeaveWise.Application.Services.LeaveRequests;
+using LeaveWise.Application.Services.LeaveTypes;
 
 namespace LeaveWise.Web.Controllers;
 
@@ -18,7 +18,7 @@ public class LeaveRequestsController(ILeaveTypesService leaveTypesService, ILeav
     {
         var leaveTypes = await leaveTypesService.GetAllAsync();
         var leaveTypesList = new SelectList(leaveTypes, "Id", "Name", leaveTypeId);
-        var model = new LeaveRequestCreateVM
+        var model = new LeaveRequestCreateVm
         {
             StartDate = DateOnly.FromDateTime(DateTime.Now),
             EndDate = DateOnly.FromDateTime(DateTime.Now.AddDays(1)),
@@ -29,7 +29,7 @@ public class LeaveRequestsController(ILeaveTypesService leaveTypesService, ILeav
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(LeaveRequestCreateVM model)
+    public async Task<IActionResult> Create(LeaveRequestCreateVm model)
     {
         if (await leaveRequestsService.RequestDatesExceedAllocationAsync(model))
         {

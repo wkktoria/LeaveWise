@@ -5,11 +5,9 @@
 
 using System.Text;
 using System.Text.Encodings.Web;
-using LeaveWise.Web.Services.LeaveAllocations;
+using LeaveWise.Application.Services.LeaveAllocations;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
-using Microsoft.EntityFrameworkCore;
 
 namespace LeaveWise.Web.Areas.Identity.Pages.Account
 {

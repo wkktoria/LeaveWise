@@ -8,17 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="13.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.11"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.11"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Views\Test\Index.cshtml" />
+      <ProjectReference Include="..\LeaveWise.Application\LeaveWise.Application.csproj" />
+      <ProjectReference Include="..\LeaveWise.Common\LeaveWise.Common.csproj" />
+      <ProjectReference Include="..\LeaveWise.Data\LeaveWise.Data.csproj" />
     </ItemGroup>
 
 </Project>

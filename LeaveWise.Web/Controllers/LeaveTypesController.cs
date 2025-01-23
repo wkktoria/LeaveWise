@@ -1,5 +1,5 @@
-using LeaveWise.Web.Models.LeaveTypes;
-using LeaveWise.Web.Services.LeaveTypes;
+using LeaveWise.Application.Models.LeaveTypes;
+using LeaveWise.Application.Services.LeaveTypes;
 
 namespace LeaveWise.Web.Controllers
 {
@@ -22,7 +22,7 @@ namespace LeaveWise.Web.Controllers
                 return NotFound();
             }
 
-            var leaveType = await leaveTypesService.GetAsync<LeaveTypeReadOnlyVM>(id.Value);
+            var leaveType = await leaveTypesService.GetAsync<LeaveTypeReadOnlyVm>(id.Value);
             if (leaveType == null)
             {
                 return NotFound();
@@ -42,7 +42,7 @@ namespace LeaveWise.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(LeaveTypeCreateVM leaveTypeCreate)
+        public async Task<IActionResult> Create(LeaveTypeCreateVm leaveTypeCreate)
         {
             if (await leaveTypesService.LeaveTypeNameExistsAsync(leaveTypeCreate.Name))
             {
@@ -66,7 +66,7 @@ namespace LeaveWise.Web.Controllers
                 return NotFound();
             }
 
-            var leaveType = await leaveTypesService.GetAsync<LeaveTypeEditVM>(id.Value);
+            var leaveType = await leaveTypesService.GetAsync<LeaveTypeEditVm>(id.Value);
             if (leaveType == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace LeaveWise.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, LeaveTypeEditVM leaveTypeEdit)
+        public async Task<IActionResult> Edit(int id, LeaveTypeEditVm leaveTypeEdit)
         {
             if (id != leaveTypeEdit.Id)
             {
@@ -120,7 +120,7 @@ namespace LeaveWise.Web.Controllers
                 return NotFound();
             }
 
-            var leaveType = await leaveTypesService.GetAsync<LeaveTypeReadOnlyVM>(id.Value);
+            var leaveType = await leaveTypesService.GetAsync<LeaveTypeReadOnlyVm>(id.Value);
             if (leaveType == null)
             {
                 return NotFound();

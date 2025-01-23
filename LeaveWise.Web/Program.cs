@@ -1,37 +1,17 @@
-using System.Reflection;
-using LeaveWise.Web.Services.Email;
-using LeaveWise.Web.Services.LeaveAllocations;
-using LeaveWise.Web.Services.LeaveRequests;
-using LeaveWise.Web.Services.LeaveTypes;
-using LeaveWise.Web.Services.Periods;
-using LeaveWise.Web.Services.Users;
-using Microsoft.AspNetCore.Identity.UI.Services;
+using LeaveWise.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddEnvironmentVariables();
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
-                       throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-builder.Services.AddScoped<ILeaveTypesService, LeaveTypesService>();
-builder.Services.AddScoped<ILeaveAllocationsService, LeaveAllocationsService>();
-builder.Services.AddScoped<ILeaveRequestsService, LeaveRequestsService>();
-builder.Services.AddScoped<IPeriodsService, PeriodsService>();
-builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddDataServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("AdminSupervisorOnly", policy => { policy.RequireRole(Roles.Administrator, Roles.Supervisor); });
 
 builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()

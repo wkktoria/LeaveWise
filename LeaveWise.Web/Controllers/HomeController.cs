@@ -1,4 +1,4 @@
-using LeaveWise.Web.Models;
+using LeaveWise.Application.Models;
 
 namespace LeaveWise.Web.Controllers;
 
