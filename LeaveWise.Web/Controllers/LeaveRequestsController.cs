@@ -65,14 +65,14 @@ public class LeaveRequestsController(ILeaveTypesService leaveTypesService, ILeav
         return View(model);
     }
 
-    [Authorize(Roles = Roles.Administrator)]
+    [Authorize(Policy = "AdminSupervisorOnly")]
     public async Task<IActionResult> Review(int id)
     {
         var model = await leaveRequestsService.GetLeaveRequestForReviewAsync(id);
         return View(model);
     }
 
-    [Authorize(Roles = Roles.Administrator)]
+    [Authorize(Policy = "AdminSupervisorOnly")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Review(int id, bool approved)

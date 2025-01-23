@@ -1,22 +1,14 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace LeaveWise.Web.Controllers
 {
     [Authorize(Roles = Roles.Administrator)]
-    public class PeriodsController : Controller
+    public class PeriodsController(ApplicationDbContext context) : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public PeriodsController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         // GET: Periods
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Periods.ToListAsync());
+            return View(await context.Periods.ToListAsync());
         }
 
         // GET: Periods/Details/5
@@ -27,7 +19,7 @@ namespace LeaveWise.Web.Controllers
                 return NotFound();
             }
 
-            var period = await _context.Periods
+            var period = await context.Periods
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (period == null)
             {
@@ -52,8 +44,8 @@ namespace LeaveWise.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(period);
-                await _context.SaveChangesAsync();
+                context.Add(period);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(period);
@@ -67,7 +59,7 @@ namespace LeaveWise.Web.Controllers
                 return NotFound();
             }
 
-            var period = await _context.Periods.FindAsync(id);
+            var period = await context.Periods.FindAsync(id);
             if (period == null)
             {
                 return NotFound();
@@ -91,8 +83,8 @@ namespace LeaveWise.Web.Controllers
             {
                 try
                 {
-                    _context.Update(period);
-                    await _context.SaveChangesAsync();
+                    context.Update(period);
+                    await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,7 +110,7 @@ namespace LeaveWise.Web.Controllers
                 return NotFound();
             }
 
-            var period = await _context.Periods
+            var period = await context.Periods
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (period == null)
             {
@@ -133,19 +125,19 @@ namespace LeaveWise.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var period = await _context.Periods.FindAsync(id);
+            var period = await context.Periods.FindAsync(id);
             if (period != null)
             {
-                _context.Periods.Remove(period);
+                context.Periods.Remove(period);
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PeriodExists(int id)
         {
-            return _context.Periods.Any(e => e.Id == id);
+            return context.Periods.Any(e => e.Id == id);
         }
     }
 }

@@ -1,7 +1,6 @@
 using LeaveWise.Web.Models.LeaveAllocations;
 using LeaveWise.Web.Services.LeaveAllocations;
 using LeaveWise.Web.Services.LeaveTypes;
-using Microsoft.AspNetCore.Authorization;
 
 namespace LeaveWise.Web.Controllers;
 
@@ -10,14 +9,14 @@ public class LeaveAllocationsController(
     ILeaveAllocationsService leaveAllocationsService,
     ILeaveTypesService leaveTypesService) : Controller
 {
-    [Authorize(Roles = Roles.Administrator)]
+    [Authorize(Policy = "AdminSupervisorOnly")]
     public async Task<IActionResult> Index()
     {
         var employees = await leaveAllocationsService.GetEmployeesAsync();
         return View(employees);
     }
 
-    [Authorize(Roles = Roles.Administrator)]
+    [Authorize(Policy = "AdminSupervisorOnly")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> AllocateLeave(string? id)
@@ -33,7 +32,7 @@ public class LeaveAllocationsController(
         return View(employeeVm);
     }
 
-    [Authorize(Roles = Roles.Administrator)]
+    [Authorize(Policy = "AdminSupervisorOnly")]
     public async Task<IActionResult> EditAllocation(int? id)
     {
         if (id == null)
@@ -50,6 +49,7 @@ public class LeaveAllocationsController(
         return View(allocation);
     }
 
+    [Authorize(Policy = "AdminSupervisorOnly")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditAllocation(LeaveAllocationEditVM allocation)

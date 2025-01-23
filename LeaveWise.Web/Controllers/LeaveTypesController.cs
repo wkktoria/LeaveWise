@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using LeaveWise.Web.Models.LeaveTypes;
 using LeaveWise.Web.Services.LeaveTypes;
-using Microsoft.AspNetCore.Authorization;
 
 namespace LeaveWise.Web.Controllers
 {
