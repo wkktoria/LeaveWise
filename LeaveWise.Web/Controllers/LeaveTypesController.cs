@@ -4,13 +4,15 @@ using LeaveWise.Application.Services.LeaveTypes;
 namespace LeaveWise.Web.Controllers
 {
     [Authorize(Roles = Roles.Administrator)]
-    public class LeaveTypesController(ILeaveTypesService leaveTypesService) : Controller
+    public class LeaveTypesController(ILeaveTypesService leaveTypesService, ILogger<LeaveTypesController> logger)
+        : Controller
     {
         private const string NameExistsValidationMessage = "This leave type already exists in the database.";
 
         // GET: LeaveTypes
         public async Task<IActionResult> Index()
         {
+            logger.LogInformation($"Loading leave types...");
             return View(await leaveTypesService.GetAllAsync());
         }
 
@@ -51,6 +53,7 @@ namespace LeaveWise.Web.Controllers
 
             if (!ModelState.IsValid)
             {
+                logger.LogWarning("Leave type creation attempt failed due to invalidity.");
                 return View(leaveTypeCreate);
             }
 

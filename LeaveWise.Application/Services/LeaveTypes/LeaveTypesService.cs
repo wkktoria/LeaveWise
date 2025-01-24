@@ -2,10 +2,12 @@ using AutoMapper;
 using LeaveWise.Application.Models.LeaveTypes;
 using LeaveWise.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace LeaveWise.Application.Services.LeaveTypes;
 
-public class LeaveTypesService(ApplicationDbContext context, IMapper mapper) : ILeaveTypesService
+public class LeaveTypesService(ApplicationDbContext context, IMapper mapper, ILogger<LeaveTypesService> logger)
+    : ILeaveTypesService
 {
     public async Task<List<LeaveTypeReadOnlyVm>> GetAllAsync()
     {
@@ -34,6 +36,7 @@ public class LeaveTypesService(ApplicationDbContext context, IMapper mapper) : I
 
     public async Task CreateAsync(LeaveTypeCreateVm model)
     {
+        logger.LogInformation("Creating leave type: {leaveTypeName} - {days}", model.Name, model.NumberOfDays);
         var leaveType = mapper.Map<LeaveType>(model);
         await context.LeaveTypes.AddAsync(leaveType);
         await context.SaveChangesAsync();

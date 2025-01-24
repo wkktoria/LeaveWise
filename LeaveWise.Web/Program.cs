@@ -1,8 +1,13 @@
 using LeaveWise.Application;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddEnvironmentVariables();
+
+builder.Host.UseSerilog((ctx, config)
+    => config.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration)
+);
 
 // Add services to the container.
 builder.Services.AddDataServices(builder.Configuration);
