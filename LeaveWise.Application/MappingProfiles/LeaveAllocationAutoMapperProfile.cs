@@ -1,7 +1,5 @@
-using AutoMapper;
 using LeaveWise.Application.Models.LeaveAllocations;
 using LeaveWise.Application.Models.Periods;
-using LeaveWise.Data;
 
 namespace LeaveWise.Application.MappingProfiles;
 

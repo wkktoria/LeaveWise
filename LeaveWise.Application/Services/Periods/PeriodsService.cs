@@ -1,6 +1,3 @@
-using LeaveWise.Data;
-using Microsoft.EntityFrameworkCore;
-
 namespace LeaveWise.Application.Services.Periods;
 
 public class PeriodsService(ApplicationDbContext context) : IPeriodsService

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace LeaveWise.Application.Models.LeaveTypes;
 
 public class LeaveTypeEditVm : BaseLeaveTypeVm

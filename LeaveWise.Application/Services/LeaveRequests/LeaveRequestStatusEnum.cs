@@ -1,4 +1,4 @@
-namespace LeaveWise.Web.Services.LeaveRequests;
+namespace LeaveWise.Application.Services.LeaveRequests;
 
 public enum LeaveRequestStatusEnum
 {

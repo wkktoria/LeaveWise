@@ -1,5 +1,4 @@
-using System.ComponentModel;
-using LeaveWise.Web.Services.LeaveRequests;
+using LeaveWise.Application.Services.LeaveRequests;
 
 namespace LeaveWise.Application.Models.LeaveRequests;
 

@@ -1,5 +1,4 @@
 using LeaveWise.Application.Models.LeaveAllocations;
-using LeaveWise.Data;
 
 namespace LeaveWise.Application.Services.LeaveAllocations;
 

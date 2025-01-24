@@ -1,7 +1,4 @@
 using LeaveWise.Common.Static;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LeaveWise.Data.Configurations;
 

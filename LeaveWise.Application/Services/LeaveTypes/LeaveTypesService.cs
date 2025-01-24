@@ -1,7 +1,4 @@
-using AutoMapper;
 using LeaveWise.Application.Models.LeaveTypes;
-using LeaveWise.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LeaveWise.Application.Services.LeaveTypes;

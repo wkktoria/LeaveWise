@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using LeaveWise.Application.Models.LeaveAllocations;
-
 namespace LeaveWise.Application.Models.LeaveAllocations;
 
 public class EmployeeAllocationVm : EmployeeListVm

@@ -1,11 +1,7 @@
-using AutoMapper;
 using LeaveWise.Application.Models.LeaveAllocations;
 using LeaveWise.Application.Models.LeaveRequests;
 using LeaveWise.Application.Services.LeaveAllocations;
 using LeaveWise.Application.Services.Users;
-using LeaveWise.Data;
-using LeaveWise.Web.Services.LeaveRequests;
-using Microsoft.EntityFrameworkCore;
 
 namespace LeaveWise.Application.Services.LeaveRequests;
 

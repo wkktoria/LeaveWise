@@ -1,6 +1,4 @@
-using AutoMapper;
 using LeaveWise.Application.Models.LeaveTypes;
-using LeaveWise.Data;
 
 namespace LeaveWise.Application.MappingProfiles;
 

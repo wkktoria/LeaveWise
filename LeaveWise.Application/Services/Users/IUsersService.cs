@@ -1,5 +1,3 @@
-using LeaveWise.Data;
-
 namespace LeaveWise.Application.Services.Users;
 
 public interface IUsersService

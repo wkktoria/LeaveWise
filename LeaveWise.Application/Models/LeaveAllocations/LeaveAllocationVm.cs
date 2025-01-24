@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using LeaveWise.Application.Models.Periods;
 using LeaveWise.Application.Models.LeaveTypes;
 

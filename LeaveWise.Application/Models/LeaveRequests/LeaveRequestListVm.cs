@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace LeaveWise.Application.Models.LeaveRequests;
 
 public class LeaveRequestListVm

@@ -1,5 +1,4 @@
 using LeaveWise.Common.Static;
-using LeaveWise.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
