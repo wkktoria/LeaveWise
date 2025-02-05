@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+<div>
+    @RenderBody()
+</div>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
