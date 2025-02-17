@@ -8,6 +8,7 @@ using System.Text.Encodings.Web;
 using LeaveWise.Application.Services.LeaveAllocations;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 
 namespace LeaveWise.Web.Areas.Identity.Pages.Account
 {
@@ -21,6 +22,7 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILeaveAllocationsService _leaveAllocationsService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -29,7 +31,8 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager,
-            ILeaveAllocationsService leaveAllocationsService)
+            ILeaveAllocationsService leaveAllocationsService,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -39,6 +42,7 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _roleManager = roleManager;
             _leaveAllocationsService = leaveAllocationsService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public string[] RoleNames { get; set; }
@@ -170,8 +174,15 @@ namespace LeaveWise.Web.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var emailTemplatePath =
+                        Path.Combine(_webHostEnvironment.WebRootPath, "templates", "email_layout.html");
+                    var template = await System.IO.File.ReadAllTextAsync(emailTemplatePath);
+                    var messageBody = template
+                        .Replace("{UserName}", $"{Input.FirstName} {Input.LastName}")
+                        .Replace("{MessageContent}",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl!)}'>clicking here</a>.");
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", messageBody);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
