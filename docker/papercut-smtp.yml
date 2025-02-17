@@ -1,0 +1,6 @@
+services:
+  papercut-smtp:
+    image: changemakerstudiosus/papercut-smtp:latest
+    ports:
+      - "8080:80"
+      - "25:25"
